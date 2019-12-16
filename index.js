@@ -8,16 +8,22 @@ const winston = require('winston');
 const { combine, label, printf } = winston.format;
 
 const Kolibri = require('./kolibri');
+const CONFIG_DEFAULTS = {
+  homeDirectory: path.resolve(os.homedir(), '.kolibri-pexer'),
+  homeTemplate: path.resolve(os.homedir(), '.kolibri'),
+  contentDirectory: path.resolve(os.homedir(), '.kolibri', 'content'),
+  python: 'python',
+  runMode: 'test',
+};
 
 const configPath = findUp.sync(['.pexerrc', '.pexerrc.json']);
 const config = configPath
-  ? JSON.parse(fs.readFileSync(configPath))
-  : {
-    homeFolder: path.resolve(os.homedir(), '.kolibri-pexer'),
-    homeTemplate: path.resolve(os.homedir(), '.kolibri'),
-    python: 'python',
-    runMode: 'test',
-  };
+  ? Object.assign({}, CONFIG_DEFAULTS, JSON.parse(fs.readFileSync(configPath)))
+  : CONFIG_DEFAULTS;
+
+if (!config.runMode) {
+  config.runMode = 'test';
+}
 
 Yargs
   .config(config)
@@ -48,6 +54,11 @@ Yargs
         )
       })
     };
+  })
+  .command({
+    command: 'config',
+    describe: 'outputs the config',
+    handler() { console.log(config) },
   })
   .commandDir('commands')
   .demandCommand()
