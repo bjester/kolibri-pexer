@@ -7,10 +7,10 @@ $ pexer --help
 pexer <command>
 
 Commands:
-  index.js init <pex>    initialize a home directory for a Kolibri pex
-  index.js manage <pex>  manage a Kolibri pex
-  index.js rm <pex>      removes a home directory for a Kolibri pex
-  index.js run <pex>     run a Kolibri pex
+  pexer init <pex>    initialize a home directory for a Kolibri pex
+  pexer manage <pex>  manage a Kolibri pex
+  pexer rm <pex>      removes a home directory for a Kolibri pex
+  pexer run <pex>     run a Kolibri pex
 
 Options:
   --version     Show version number                                    [boolean]
