@@ -1,0 +1,25 @@
+{
+  "name": "kolibri-pexer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "pexer": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Blaine Jester",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "config": "^3.2.4",
+    "find-up": "^4.1.0",
+    "fs-extra": "^8.1.0",
+    "promise-be-deferred": "^1.0.1",
+    "stream-filter": "^2.1.0",
+    "winston": "^3.2.1",
+    "yargs": "^15.0.2"
+  }
+}
