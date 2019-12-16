@@ -16,7 +16,7 @@ const config = configPath
     homeFolder: path.resolve(os.homedir(), '.kolibri-pexer'),
     homeTemplate: path.resolve(os.homedir(), '.kolibri'),
     python: 'python',
-    runMode: null,
+    runMode: 'test',
   };
 
 Yargs
