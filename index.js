@@ -37,6 +37,16 @@ Yargs
     type: 'string',
     description: 'python binary to use',
   })
+  .option('port', {
+    type: 'number',
+    description: 'the port to run Kolibri on',
+    default: 8080,
+  })
+  .option('clean', {
+    type: 'boolean',
+    description: 'do not use content directory or home template',
+    default: false,
+  })
   .middleware((argv) => {
     return {
       kolibri: Kolibri.build(argv),

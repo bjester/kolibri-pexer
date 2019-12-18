@@ -23,8 +23,9 @@ Options:
 Add an `.pexerrc` file to your home directory. The config is JSON and is as follows:
 ```json
 {
-  "homeFolder": "/path/to/directory/where/all/homes/will/be/created",
+  "homeDirectory": "/path/to/directory/where/all/homes/will/be/created",
   "homeTemplate": "/path/to/existing/home/used/as/template",
+  "contentDirectory": "/path/to/content/directory",
   "python": "python",
   "runMode": "blaine"
 }
@@ -32,8 +33,9 @@ Add an `.pexerrc` file to your home directory. The config is JSON and is as foll
 Defaults are:
 ```json
 {
-  "homeFolder": "~/.kolibri-pexer",
+  "homeDirectory": "~/.kolibri-pexer",
   "homeTemplate": "~/.kolibri",
+  "contentDirectory": "~/.kolibri/content",
   "python": "python",
-  "runMode": null
+  "runMode": "test"
 }

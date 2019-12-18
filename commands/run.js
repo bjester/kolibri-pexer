@@ -18,7 +18,12 @@ function handler(argv) {
       process.on('SIGTERM', () => interrupted.resolve('SIGTERM'));
       process.on('SIGINT', () => interrupted.resolve('SIGINT'));
 
-      const start = kolibri.spawn('start', ['--foreground']);
+      const args = [];
+      if (!argv.background) {
+        args.push(['--foreground']);
+      }
+
+      const start = kolibri.spawn('start', args);
       start.on('close', () => executed.resolve());
 
       start.stdout.pipe(process.stdout);
@@ -53,12 +58,18 @@ function handler(argv) {
 
 module.exports = {
   command: 'run <pex>',
-  alias: 'r',
+  aliases: ['r', 'start'],
   describe: 'run a Kolibri pex',
   builder: (yargs) => {
-    yargs.positional('pex', {
-      describe: 'the pex file',
-    });
+    yargs
+      .option('background', {
+        type: 'boolean',
+        description: 'run in background instead of foreground (default)',
+        default: false,
+      })
+      .positional('pex', {
+        describe: 'the pex file',
+      });
   },
   handler,
 };

@@ -8,10 +8,11 @@ class Kolibri
     this._options = options;
   }
 
-  getHome(withPython = true) {
+  getHome(child = true) {
     const home = path.resolve(this._options.homeDirectory, path.basename(this._pexFile, '.pex'));
-    return withPython
-      ? path.resolve(home, this._options.python)
+
+    return child
+      ? path.resolve(home, `${this._options.python}-${this._options.port}`)
       : home;
   }
 
@@ -19,15 +20,21 @@ class Kolibri
     const { logger } = this._options;
     args.unshift(this._pexFile, command);
 
+    const contentDirectory = this._options.clean
+      ? 'content'
+      : this._options.contentDirectory;
+
     logger.verbose(`KOLIBRI_HOME=${this.getHome()}`);
-    logger.verbose(`KOLIBRI_CONTENT_DIR=${this._options.contentDirectory}`);
+    logger.verbose(`KOLIBRI_CONTENT_DIR=${contentDirectory}`);
     logger.verbose(`KOLIBRI_RUN_MODE=${this._options.runMode}`);
+    logger.verbose(`KOLIBRI_HTTP_PORT=${this._options.port}`);
 
     return spawn(this._options.python, args, {
       env: Object.assign({} , process.env, {
         KOLIBRI_HOME: this.getHome(),
-        KOLIBRI_CONTENT_DIR: this._options.contentDirectory,
+        KOLIBRI_CONTENT_DIR: contentDirectory,
         KOLIBRI_RUN_MODE: this._options.runMode,
+        KOLIBRI_HTTP_PORT: this._options.port,
       }),
     });
   }

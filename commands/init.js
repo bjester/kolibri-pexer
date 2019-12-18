@@ -17,7 +17,7 @@ function handler(argv) {
     })
     .then(() => fs.pathExists(path.resolve(home, '.data_version')))
     .then(exists => {
-      if (exists || !argv.homeTemplate) {
+      if (exists || !argv.homeTemplate || argv.clean) {
         logger.info(`Home directory is already initialized`);
 
         return Promise.resolve();
