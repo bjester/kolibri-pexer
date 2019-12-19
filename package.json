@@ -14,12 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^3.0.0",
-    "config": "^3.2.4",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "promise-be-deferred": "^1.0.1",
     "stream-filter": "^2.1.0",
     "winston": "^3.2.1",
-    "yargs": "^15.0.2"
+    "yargs": "^15.0.2",
+    "yauzl": "^2.10.0"
   }
 }

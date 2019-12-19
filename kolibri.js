@@ -1,6 +1,9 @@
 const { spawn } = require('child_process');
 const path = require('path');
 
+const Defer = require('promise-be-deferred');
+const yauzl = require('yauzl');
+
 class Kolibri
 {
   constructor(pexFile, options) {
@@ -14,6 +17,32 @@ class Kolibri
     return child
       ? path.resolve(home, `${this._options.python}-${this._options.port}`)
       : home;
+  }
+
+  getInfo() {
+    const read = new Defer();
+    const buf = [];
+
+    yauzl.open(this._pexFile, { lazyEntries: true }, (err, zipFile) => {
+      if (err) throw err;
+
+      zipFile.on('entry', (entry) => {
+        if (entry.fileName !== 'PEX-INFO') {
+          return process.nextTick(() => zipFile.readEntry());
+        }
+
+        zipFile.openReadStream(entry, (err, pexInfo) => {
+          pexInfo.on('data', data => buf.push(data));
+          pexInfo.on('end', () => {
+            zipFile.close();
+            read.resolve(JSON.parse(Buffer.concat(buf).toString()));
+          });
+        });
+      });
+      zipFile.readEntry();
+    });
+
+    return read;
   }
 
   spawn(command, args = []) {
