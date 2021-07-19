@@ -57,7 +57,7 @@ Yargs
           new winston.transports.Console(),
         ],
         format: combine(
-          label({label: 'NEXER'}),
+          label({label: 'PEXER'}),
           printf(({level, message, label}) => {
             return `[${label}] ${level.toUpperCase()}: ${message}`;
           })

@@ -67,6 +67,18 @@ class Kolibri
       }),
     });
   }
+
+  manage(args) {
+    const { logger } = this._options;
+    logger.verbose(`Invoking management command: ${args.join(', ')}`);
+
+    const child = this.spawn('manage', args);
+    child.stdout.pipe(process.stdout);
+    child.stderr.pipe(process.stderr);
+    return new Promise(resolve => {
+      child.on('exit', () => resolve(null));
+    });
+  }
 }
 
 Kolibri.build = function(argv)
