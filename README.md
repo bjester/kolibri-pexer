@@ -7,12 +7,14 @@ $ pexer --help
 pexer <command>
 
 Commands:
-  pexer config        outputs the config
-  pexer init <pex>    initialize a home directory for a Kolibri pex
-  pexer manage <pex>  manage a Kolibri pex
-  pexer rm <pex>      removes a home directory for a Kolibri pex
-  pexer run <pex>     run a Kolibri pex                   [aliases: r, start]
-  pexer stop <pex>    stop an already background running Kolibri pex
+  pexer config                           outputs the config
+  pexer download <kolibri_version>       downloads a PEX with specific version
+  pexer info <pex>                       shows info for a Kolibri pex
+  pexer init <pex>                       initialize a home directory for a Kolibri pex
+  pexer manage <pex> [args..]            manage a Kolibri pex
+  pexer rm <pex>                         removes a home directory for a Kolibri pex
+  pexer run <pex>                        run a Kolibri pex [aliases: r, start]
+  pexer stop <pex>                       stop an already background running Kolibri pex
 
 Options:
   --version     Show version number                                    [boolean]
