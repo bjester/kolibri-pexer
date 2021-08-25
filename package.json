@@ -13,6 +13,7 @@
   "author": "Blaine Jester",
   "license": "ISC",
   "dependencies": {
+    "@octokit/core": "^3.5.1",
     "chalk": "^3.0.0",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",

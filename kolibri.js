@@ -65,6 +65,8 @@ class Kolibri
         KOLIBRI_RUN_MODE: this._options.runMode,
         KOLIBRI_HTTP_PORT: this._options.port,
       }),
+      detached: true,
+      windowsHide: true,
     });
   }
 
@@ -81,12 +83,18 @@ class Kolibri
   }
 }
 
+Kolibri.VERSION_REGEX = /^v([ab\d\.]+)$/
 Kolibri.build = function(argv)
 {
   if (!argv.pex) {
     return null;
   }
-  return new Kolibri(path.resolve(process.cwd(), argv.pex), argv);
+
+  let pexFile = Kolibri.VERSION_REGEX.test(argv.pex)
+    ? path.resolve(argv.homeDirectory, argv.pex.replace(Kolibri.VERSION_REGEX, "kolibri-$1.pex"))
+    : path.resolve(process.cwd(), argv.pex);
+
+  return new Kolibri(pexFile, argv);
 };
 
 module.exports = Kolibri;
